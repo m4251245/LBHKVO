@@ -55,6 +55,11 @@
     NSLog(@"%@",change);
 }
 
+- (void)lbh_observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change context:(nullable void *)context
+{
+    
+}
+
 - (void)dealloc{
     [self.person lg_removeObserver:self forKeyPath:@"nickName"];
     NSLog(@"end");

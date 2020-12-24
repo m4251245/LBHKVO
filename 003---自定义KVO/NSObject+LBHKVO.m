@@ -117,7 +117,6 @@ static NSString *const LBHKVOAssiociakey = @"kLBHKVO_AssiociateKey";
     
     // 2.2.3 动态添加set函数
     
-    //两个SEL 通过class_getMethodImplementation获取到的实现地址IMP是相同的
     SEL setterSel = NSSelectorFromString(setterForGetter(keyPath));
     
     Method setterMethod = class_getInstanceMethod([self class], setterSel); //为了保证types和原来的类的Imp保持一致，所以从[self class]提取
@@ -181,7 +180,6 @@ static void lbh_setter(id self, SEL _cmd, id newValue) {
     };
 
     lbh_msgSendSuper(&superStruct, _cmd, newValue);
-    
 //    objc_msgSendSuper(&superStruct, _cmd, newValue);
     
     // 3. didChange在此处触发（本示例省略）
@@ -194,9 +192,9 @@ static void lbh_setter(id self, SEL _cmd, id newValue) {
                 info.hanldBlock(info.observer, keyPath, oldValue, newValue);
             }
 //            // 3.2 调用方法的方式
-//            if([info.observer respondsToSelector:@selector(ht_observeValueForKeyPath: ofObject: change: context:)]) {
-//                [info.observer ht_observeValueForKeyPath:keyPath ofObject:self change:@{keyPath: newValue} context:NULL];
-//            }
+            if([info.observer respondsToSelector:@selector(lbh_observeValueForKeyPath: ofObject: change: context:)]) {
+                [info.observer lbh_observeValueForKeyPath:keyPath ofObject:self change:@{keyPath: newValue} context:NULL];
+            }
         }
     }
     
