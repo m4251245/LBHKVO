@@ -194,9 +194,9 @@ static void lbh_setter(id self, SEL _cmd, id newValue) {
                 info.hanldBlock(info.observer, keyPath, oldValue, newValue);
             }
 //            // 3.2 调用方法的方式
-//            if([info.observer respondsToSelector:@selector(ht_observeValueForKeyPath: ofObject: change: context:)]) {
-//                [info.observer ht_observeValueForKeyPath:keyPath ofObject:self change:@{keyPath: newValue} context:NULL];
-//            }
+            if([info.observer respondsToSelector:@selector(lbh_observeValueForKeyPath: ofObject: change: context:)]) {
+                [info.observer lbh_observeValueForKeyPath:keyPath ofObject:self change:@{keyPath: newValue} context:NULL];
+            }
         }
     }
     

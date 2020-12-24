@@ -22,11 +22,9 @@
     [super viewDidLoad];
     
     
+    //自定义KVO
     self.person = [[LBHPerson alloc] init];
-//    [self.person lg_addObserver:self forKeyPath:@"nickName" options:(LGKeyValueObservingOptionNew|LGKeyValueObservingOptionOld) context:NULL];
-//    [self.person lg_addObserver:self forKeyPath:@"name" options:(LGKeyValueObservingOptionNew|LGKeyValueObservingOptionOld) context:NULL];
-    
-    
+
     [self.person lbh_addObserver:self forKeyPath:@"nickName" options:(LBHKeyValueObservingOptionNew|LBHKeyValueObservingOptionOld) context:NULL block:^(id  _Nonnull observer, NSString * _Nonnull keyPath, id  _Nonnull oldValue, id  _Nonnull newValue) {
           
         NSLog(@"回调响应：oldValue: %@, newValue:%@", oldValue, newValue);
@@ -52,6 +50,11 @@
 
 #pragma mark - KVO回调
 - (void)lg_observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    NSLog(@"%@",change);
+}
+
+- (void)lbh_observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change context:(nullable void *)context
+{
     NSLog(@"%@",change);
 }
 
